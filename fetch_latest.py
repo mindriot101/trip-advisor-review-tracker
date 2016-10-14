@@ -1,9 +1,64 @@
-def fetch_reviews(url):
-    return {
-        'excellent': 873,
-        'very good': 1646,
-        'average': 1275,
-        'poor': 536,
-        'terrible': 322,
-    }
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+
+import re
+import requests
+from bs4 import BeautifulSoup
+import argparse
+
+def parse_hotel(soup):
+    chart = soup.find('div', id='ratingFilter')
+
+    results = {}
+
+    for li in chart.ul.find_all('li'):
+        label = li.find('div').text.lower()
+        rating = int(li.find_all('span')[-2].text.replace(',', '').strip())
+
+        results[label] = rating
+
+    return results
+
+def parse_attraction(soup):
+    chart = soup.find('div', class_='visitorRating')
+
+    results = {}
+    for li in chart.ul.find_all('li'):
+        label = li.find('div', class_='label').text.lower()
+        rating = int(li.find('div', class_='valueCount').text.replace(',', '').strip())
+        results[label] = rating
+
+    return results
+
+PARSE_FUNCTIONS = {
+    'hotel': parse_hotel,
+    'attraction': parse_attraction,
+}
+
+def fetch_reviews(url, kind):
+    r = requests.get(url)
+    r.raise_for_status()
+
+    html_text = r.text
+    soup = BeautifulSoup(html_text, 'html.parser')
+
+    return PARSE_FUNCTIONS[kind](soup)
+
+def print_results(results):
+    order = ['excellent', 'very good', 'average', 'poor', 'terrible']
+    keys = ['{name}:{value}'.format(name=name, value=results[name])
+            for name in order]
+
+    out = ','.join(keys)
+    print(out)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('url')
+    parser.add_argument('-k', '--kind', required=True, choices=['hotel', 'attraction'])
+    args = parser.parse_args()
+
+    results = fetch_reviews(args.url, kind=args.kind)
+    print_results(results)
