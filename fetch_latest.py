@@ -7,14 +7,22 @@ from bs4 import BeautifulSoup
 import argparse
 
 
+def format_label(label):
+    return label.lower().replace(' ', '_')
+
+
+def format_value(value):
+    return int(value.replace(',', ''))
+
+
 def parse_hotel(soup):
     chart = soup.find('div', id='ratingFilter')
 
     results = {}
 
     for li in chart.ul.find_all('li'):
-        label = li.find('div').text.lower()
-        rating = int(li.find_all('span')[-2].text.replace(',', '').strip())
+        label = format_label(li.find('div').text)
+        rating = format_value(li.find_all('span')[-2].text)
 
         results[label] = rating
 
@@ -26,10 +34,8 @@ def parse_attraction(soup):
 
     results = {}
     for li in chart.ul.find_all('li'):
-        label = li.find('div', class_='label').text.lower()
-        rating = int(
-            li.find('div', class_='valueCount').text.replace(',', '').strip()
-        )
+        label = format_label(li.find('div', class_='label').text)
+        rating = format_value(li.find('div', class_='valueCount').text)
         results[label] = rating
 
     return results
@@ -51,7 +57,7 @@ def fetch_reviews(url, kind):
 
 
 def format_results(results):
-    order = ['excellent', 'very good', 'average', 'poor', 'terrible']
+    order = ['excellent', 'very_good', 'average', 'poor', 'terrible']
     keys = ['{name}:{value}'.format(name=name, value=results[name])
             for name in order]
 
