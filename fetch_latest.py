@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-import re
 import requests
 from bs4 import BeautifulSoup
 import argparse
+
 
 def parse_hotel(soup):
     chart = soup.find('div', id='ratingFilter')
@@ -20,13 +20,16 @@ def parse_hotel(soup):
 
     return results
 
+
 def parse_attraction(soup):
     chart = soup.find('div', class_='visitorRating')
 
     results = {}
     for li in chart.ul.find_all('li'):
         label = li.find('div', class_='label').text.lower()
-        rating = int(li.find('div', class_='valueCount').text.replace(',', '').strip())
+        rating = int(
+            li.find('div', class_='valueCount').text.replace(',', '').strip()
+        )
         results[label] = rating
 
     return results
@@ -35,6 +38,7 @@ PARSE_FUNCTIONS = {
     'hotel': parse_hotel,
     'attraction': parse_attraction,
 }
+
 
 def fetch_reviews(url, kind):
     r = requests.get(url)
@@ -57,7 +61,8 @@ def format_results(results):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('url')
-    parser.add_argument('-k', '--kind', required=True, choices=['hotel', 'attraction'])
+    parser.add_argument('-k', '--kind', required=True,
+                        choices=['hotel', 'attraction'])
     args = parser.parse_args()
 
     results = fetch_reviews(args.url, kind=args.kind)
