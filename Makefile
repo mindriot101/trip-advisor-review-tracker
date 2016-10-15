@@ -1,12 +1,9 @@
 all: help
 
 help:
-	@echo  "Tasks: test coverage lint compile-packages sync-packages"
+	@echo  "Tasks: test lint compile-packages sync-packages"
 
 test:
-	py.test testing
-
-coverage:
 	py.test --cov fetch_latest.py --cov-report html --cov-report term testing
 
 lint:
@@ -19,4 +16,4 @@ compile-packages:
 sync-packages:
 	pip-sync
 
-.PHONY: help test coverage lint compile-packages sync-packages
+.PHONY: help test lint compile-packages sync-packages
