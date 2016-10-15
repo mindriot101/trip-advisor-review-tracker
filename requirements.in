@@ -1,7 +1,7 @@
 beautifulsoup4
 requests
 ipython
-pytest
+pytest>=3
 vcrpy
 pytest-cov
 flake8
