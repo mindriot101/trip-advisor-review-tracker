@@ -40,6 +40,6 @@ def test_format_results():
         'terrible': 27,
     }
 
-    expected = 'excellent:251,very good:222,average:216,poor:62,terrible:27'
+    expected = 'excellent:251 very_good:222 average:216 poor:62 terrible:27'
 
     assert fetch_latest.format_results(results) == expected

@@ -61,7 +61,7 @@ def format_results(results):
     keys = ['{name}:{value}'.format(name=name, value=results[name])
             for name in order]
 
-    return ','.join(keys)
+    return ' '.join(keys)
 
 
 if __name__ == '__main__':  # pragma: no cover
