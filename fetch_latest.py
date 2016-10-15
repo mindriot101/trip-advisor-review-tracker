@@ -45,13 +45,13 @@ def fetch_reviews(url, kind):
 
     return PARSE_FUNCTIONS[kind](soup)
 
-def print_results(results):
+
+def format_results(results):
     order = ['excellent', 'very good', 'average', 'poor', 'terrible']
     keys = ['{name}:{value}'.format(name=name, value=results[name])
             for name in order]
 
-    out = ','.join(keys)
-    print(out)
+    return ','.join(keys)
 
 
 if __name__ == '__main__':
@@ -61,4 +61,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     results = fetch_reviews(args.url, kind=args.kind)
-    print_results(results)
+    print(format_results(results))
