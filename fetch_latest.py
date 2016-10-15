@@ -58,7 +58,7 @@ def format_results(results):
     return ','.join(keys)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     parser = argparse.ArgumentParser()
     parser.add_argument('url')
     parser.add_argument('-k', '--kind', required=True,
