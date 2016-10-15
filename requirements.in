@@ -3,3 +3,5 @@ requests
 ipython
 pytest
 vcrpy
+pytest-cov
+flake8
