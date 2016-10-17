@@ -3,3 +3,4 @@ venv
 *.pyc
 .coverage
 htmlcov
+score_*.txt
