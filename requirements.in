@@ -7,3 +7,4 @@ pytest-cov
 flake8
 numpy
 matplotlib
+autopep8
