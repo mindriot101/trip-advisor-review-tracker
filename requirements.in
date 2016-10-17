@@ -6,5 +6,5 @@ vcrpy
 pytest-cov
 flake8
 numpy
-matplotlib
+matplotlib==2.0.0b4
 autopep8

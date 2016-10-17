@@ -10,12 +10,11 @@ from collections import namedtuple
 import numpy as np
 import datetime
 
-plt.style.use(['ggplot'])
-
 logging.basicConfig(
     level='INFO', format='%(asctime)s : %(message)s')
 logger = logging.getLogger(__name__)
 
+plt.style.use(['seaborn-talk'])
 
 class SourceFile(object):
 

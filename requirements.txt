@@ -13,7 +13,7 @@ decorator==4.0.10         # via ipython, traitlets
 flake8==3.0.4
 ipython-genutils==0.1.0   # via traitlets
 ipython==5.1.0
-matplotlib==1.5.3
+matplotlib==2.0.0b4
 mccabe==0.5.2             # via flake8
 numpy==1.11.2
 pep8==1.7.0               # via autopep8
@@ -33,7 +33,7 @@ pytz==2016.7              # via matplotlib
 PyYAML==3.12              # via vcrpy
 requests==2.11.1
 simplegeneric==0.8.1      # via ipython
-six==1.10.0               # via cycler, prompt-toolkit, python-dateutil, traitlets, vcrpy
+six==1.10.0               # via cycler, matplotlib, prompt-toolkit, python-dateutil, traitlets, vcrpy
 traitlets==4.3.1          # via ipython
 vcrpy==1.10.3
 wcwidth==0.1.7            # via prompt-toolkit
