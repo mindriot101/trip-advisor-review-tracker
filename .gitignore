@@ -4,3 +4,4 @@ venv
 .coverage
 htmlcov
 score_*.txt
+score_*.png
