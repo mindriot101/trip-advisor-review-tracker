@@ -21,7 +21,7 @@ plt.style.use(['seaborn-talk'])
 class SourceFile(object):
 
     score_headings = ['excellent', 'very_good', 'average', 'poor', 'terrible']
-    score_values = [5, 2, 0, -2, 5]
+    score_values = [5, 2, 0, -2, -5]
 
     def __init__(self, name, filename):
         self.filename = filename
